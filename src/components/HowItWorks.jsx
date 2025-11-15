@@ -37,7 +37,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <div className="w-11/12 mx-auto mt-20">
+    <div className="w-11/12 mx-auto mt-26">
       <Container>
         <h3 className="font-bold text-3xl text-second my-4">How It Works</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
