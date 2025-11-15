@@ -32,7 +32,7 @@ const HowItWorks = () => {
       icon: <PackageCheck size={47}/>,
       title: "Fast & Safe Delivery",
       subTitle:
-        "Your parcel is delivered safely to the destination with instant delivery confirmation.",
+        "Your parcel is delivered safely to the destination with instant delivery.",
     },
   ];
 
