@@ -4,6 +4,7 @@ import HowItWorks from '../components/HowItWorks';
 import OurService from '../components/OurService';
 import Brands from '../components/Brands';
 import FeaturesSection from '../components/FeaturesSection';
+import MerchantBanner from '../components/MerchantBanner';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <OurService />
             <Brands />
             <FeaturesSection />
+            <MerchantBanner />
         </>
     );
 };
