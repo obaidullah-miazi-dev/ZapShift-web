@@ -22,7 +22,7 @@ const MerchantBanner = () => {
           <div className="relative flex flex-col md:flex-row items-center justify-between px-8 py-12 md:px-16 md:py-20 gap-10">
 
             {/* Left – Text + Buttons */}
-            <div className="max-w-lg space-y-6">
+            <div className="space-y-6 flex-2">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
                 Merchant and Customer Satisfaction
                 <br />
@@ -45,17 +45,17 @@ const MerchantBanner = () => {
 
                 {/* Outline button */}
                 <OutlineBtn className="border-main text-main hover:bg-main hover:text-black font-semibold rounded-full transition-colors">
-                  Earn with ZapShift Courier
+                  Earn with ZapShift
                 </OutlineBtn>
               </div>
             </div>
 
             {/* Right – Parcel illustration */}
-            <div className="shrink-0">
+            <div className="flex-1">
               <img
                 src={parcelIllustration}
                 alt="Parcel with location pin"
-                className="w-48 md:w-64 lg:w-80"
+                className="w-48 md:w-64 lg:w-full"
               />
             </div>
           </div>
