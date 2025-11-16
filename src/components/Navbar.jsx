@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { Menu } from "lucide-react";
 import OutlineBtn from "./OutlineBtn";
 import PrimaryBtn from "./PrimaryBtn";
@@ -18,20 +18,20 @@ const Navbar = () => {
 
   const navlinks = (
     <>
-      <NavLink to="/" onClick={handleNavClick}>
-        <li>Services</li>
+      <NavLink to="/services" onClick={handleNavClick}>
+        <li className="linkStyle">Services</li>
       </NavLink>
-      <NavLink to="/" onClick={handleNavClick}>
-        <li>Coverage</li>
+      <NavLink to="/coverage" onClick={handleNavClick}>
+        <li className="linkStyle">Coverage</li>
       </NavLink>
-      <NavLink to="/" onClick={handleNavClick}>
-        <li>About Us</li>
+      <NavLink to="/about" onClick={handleNavClick}>
+        <li className="linkStyle">About Us</li>
       </NavLink>
-      <NavLink to="/" onClick={handleNavClick}>
-        <li>Pricing</li>
+      <NavLink to="/pricing" onClick={handleNavClick}>
+        <li className="linkStyle">Pricing</li>
       </NavLink>
-      <NavLink to="/" onClick={handleNavClick}>
-        <li>Be a Rider</li>
+      <NavLink to="/beRider" onClick={handleNavClick}>
+        <li className="linkStyle">Be a Rider</li>
       </NavLink>
     </>
   );
@@ -40,8 +40,10 @@ const Navbar = () => {
     <Container>
       <nav className="bg-white rounded-2xl md:px-8 px-4 md:py-2">
         <nav className="py-4 flex justify-between items-center">
-          <img src={logo} alt="" />
-          <ul className="lg:flex hidden items-center gap-12 font-semibold text-lg">
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
+          <ul className="lg:flex hidden items-center gap-8 font-semibold text-lg">
             {navlinks}
           </ul>
 
