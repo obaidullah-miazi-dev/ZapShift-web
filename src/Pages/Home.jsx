@@ -5,6 +5,7 @@ import OurService from '../components/OurService';
 import Brands from '../components/Brands';
 import FeaturesSection from '../components/FeaturesSection';
 import MerchantBanner from '../components/MerchantBanner';
+import CustomerReviews from '../components/CustomerReviews';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <Brands />
             <FeaturesSection />
             <MerchantBanner />
+            <CustomerReviews />
         </>
     );
 };
