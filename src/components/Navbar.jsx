@@ -34,8 +34,8 @@ const Navbar = () => {
       <NavLink to="/about" onClick={handleNavClick}>
         <li className="linkStyle">About Us</li>
       </NavLink>
-      <NavLink to="/pricing" onClick={handleNavClick}>
-        <li className="linkStyle">Pricing</li>
+      <NavLink to="/sendParcel" onClick={handleNavClick}>
+        <li className="linkStyle">Send Parcel</li>
       </NavLink>
       <NavLink to="/beRider" onClick={handleNavClick}>
         <li className="linkStyle">Be a Rider</li>

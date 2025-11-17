@@ -10,7 +10,7 @@ const AuthLayout = () => {
                 <img src={logo} alt="logo"  className='mt-5'/>
             </NavLink>
 
-            <div className='flex items-center flex-col-reverse lg:flex-row gap-12 justify-between min-h-screen mt-16 py-8'>
+            <div className='flex items-center flex-col-reverse lg:flex-row gap-12 justify-between min-h-screen lg:mt-0 mt-16 py-8'>
                 <div className='flex-1'>
                     <Outlet></Outlet>
                 </div>
