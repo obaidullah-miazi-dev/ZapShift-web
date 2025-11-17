@@ -10,13 +10,18 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
   const drawerCheckbox = useRef(null);
-  const {user} = useContext(AuthContext)
+  const {user,logOut} = useContext(AuthContext)
 
   const handleNavClick = () => {
     if (drawerCheckbox.current) {
       drawerCheckbox.current.checked = false;
     }
   };
+
+  const handleLogOut = ()=>{
+    alert('are you sure to log out')
+    logOut()
+  }
 
   const navlinks = (
     <>
@@ -50,7 +55,7 @@ const Navbar = () => {
           </ul>
 
           <div className="xl:flex hidden items-center gap-4 font-semibold text-lg">
-            {user?<OutlineBtn className="rounded-xl">Log Out</OutlineBtn>:<OutlineBtn className="rounded-xl">Sign In</OutlineBtn>}
+            {user?<button onClick={handleLogOut}><OutlineBtn className="rounded-xl">Log Out</OutlineBtn></button>:<NavLink to='/login'><OutlineBtn className="rounded-xl">Sign In</OutlineBtn></NavLink>}
             <div className="flex items-center gap-0.5">
               <PrimaryBtn className="rounded-xl">Be a Rider</PrimaryBtn>
               <CircleIcon />
