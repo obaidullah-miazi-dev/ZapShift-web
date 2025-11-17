@@ -1,18 +1,62 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { createUser, updateUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+
   const handleRegister = (data) => {
-    console.log(data);
+    console.log(data.photo[0]);
+    const profilePhoto = data.photo[0];
+    createUser(data.email, data.password).then((res) => {
+      console.log(res.user);
+
+      const formData = new FormData();
+      formData.append("image", profilePhoto);
+
+      const imageApiUrl = `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_image_host_api_key
+      }`;
+
+      axios.post(imageApiUrl, formData).then((res) => {
+        console.log("after image upload", res.data.data.url);
+
+        const userProfile = {
+          displayName: data.name,
+          photoURL: res.data.data.url,
+        };
+
+        updateUser(userProfile)
+          .then(() => {
+            alert("sucessfull");
+            navigate(location.state || "/");
+          })
+          .catch((error) => {
+            alert(error);
+          });
+      })
+      .catch(error=>{
+        alert(error)
+      })
+    })
+    .catch(error => {
+      alert(error)
+    })
   };
   return (
     <div>
@@ -21,47 +65,45 @@ const Register = () => {
         <h1 className="text-4xl font-bold mb-2">Create an Account</h1>
         <p className=" text-gray-600 mb-8">Register with ZapShift</p>
 
-        {/* Avatar Upload
-        <div className="flex justify-center mb-8">
-          <label htmlFor="avatar" className="relative cursor-pointer group">
-            <div className="w-24 h-24 rounded-full bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center">
-              <svg
-                className="w-8 h-8 text-gray-400 group-hover:text-gray-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                />
-              </svg>
-            </div>
-            <input
-              id="avatar"
-              type="file"
-              accept="image/*"
-              className="hidden"
-            />
-            <div className="absolute inset-0 rounded-full bg-black bg-opacity-0 group-hover:bg-opacity-10 transition"></div>
-          </label>
-        </div> */}
-
         {/* Form */}
         <form className="space-y-5" onSubmit={handleSubmit(handleRegister)}>
+          {/* Avatar Upload */}
+          <div className="flex mb-8">
+            <label htmlFor="avatar" className="relative cursor-pointer group">
+              <div className="w-24 h-24 rounded-full bg-gray-100 border-2  border-main flex items-center justify-center">
+                <img
+                  width="60"
+                  height="60"
+                  src="https://img.icons8.com/fluency/48/user-male-circle--v1.png"
+                  alt="user-male-circle--v1"
+                />
+              </div>
+              <input
+                id="avatar"
+                type="file"
+                {...register("photo", { required: true })}
+                accept="image/*"
+                // className="hidden"
+              />
+              {errors.photo?.type === "required" && (
+                <p className="text-red-500">Image Required</p>
+              )}
+
+              <div className="absolute  rounded-full group-hover:bg-opacity-10 transition"></div>
+            </label>
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Name
             </label>
             <input
               type="text"
-              {...register("text", { required: true })}
+              {...register("name", { required: true })}
               placeholder="Name"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-main focus:border-transparent outline-none transition"
             />
-            {errors.text?.type === "required" && (
+            {errors.name?.type === "required" && (
               <p className="text-red-500">Name Required</p>
             )}
           </div>
@@ -115,7 +157,6 @@ const Register = () => {
             </div>
           </div>
 
-
           {/* Register Button */}
           <button
             type="submit"
@@ -128,7 +169,10 @@ const Register = () => {
         {/* Login Link */}
         <p className="text-center text-sm text-gray-600 mt-6">
           Already have an account?{" "}
-          <Link to="/login" className="text-[#90c000] font-medium hover:underline">
+          <Link
+            to="/login"
+            className="text-[#90c000] font-medium hover:underline"
+          >
             Login
           </Link>
         </p>

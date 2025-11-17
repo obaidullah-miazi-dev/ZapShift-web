@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { Link, NavLink } from "react-router";
 import { Menu } from "lucide-react";
 import OutlineBtn from "./OutlineBtn";
@@ -6,9 +6,11 @@ import PrimaryBtn from "./PrimaryBtn";
 import CircleIcon from "./CircleIcon";
 import logo from "../assets/images/ZapShift-logo.png";
 import Container from "./Container";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
   const drawerCheckbox = useRef(null);
+  const {user} = useContext(AuthContext)
 
   const handleNavClick = () => {
     if (drawerCheckbox.current) {
@@ -48,7 +50,7 @@ const Navbar = () => {
           </ul>
 
           <div className="xl:flex hidden items-center gap-4 font-semibold text-lg">
-            <OutlineBtn className="rounded-xl">Sign In</OutlineBtn>
+            {user?<OutlineBtn className="rounded-xl">Log Out</OutlineBtn>:<OutlineBtn className="rounded-xl">Sign In</OutlineBtn>}
             <div className="flex items-center gap-0.5">
               <PrimaryBtn className="rounded-xl">Be a Rider</PrimaryBtn>
               <CircleIcon />

@@ -18,9 +18,9 @@ const AuthProvider = ({ children }) => {
     }
 
 
-    const updateUser = (updateUser)=>{
+    const updateUser = (userInfo)=>{
         setLoading(true)
-        return updateProfile(auth.currentUser,updateUser)
+        return updateProfile(auth.currentUser,userInfo)
     }
 
     const signInUser = (email, password) => {
@@ -28,7 +28,7 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    const googleProvider = new GoogleAuthProvider
+    const googleProvider = new GoogleAuthProvider()
     const googleLogIn = () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
