@@ -62,8 +62,8 @@ const Register = () => {
     <div>
       <div className="w-full">
         {/* Title */}
-        <h1 className="text-4xl font-bold mb-2">Create an Account</h1>
-        <p className=" text-gray-600 mb-8">Register with ZapShift</p>
+        <h1 className="text-4xl md:text-7xl font-bold mb-2">Create an Account</h1>
+        <p className=" text-gray-600 md:text-2xl mb-8">Register with ZapShift</p>
 
         {/* Form */}
         <form className="space-y-5" onSubmit={handleSubmit(handleRegister)}>
