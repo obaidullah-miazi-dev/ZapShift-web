@@ -6,6 +6,9 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import SendParcel from "../Pages/SendParcel";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import PrivateRoute from "../Provider/PrivateRoute";
+import MyParcels from "../Pages/MyParcels";
 
 export const router = createBrowserRouter([
     {
@@ -23,7 +26,8 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/sendParcel',
-                Component: SendParcel
+                Component: SendParcel,
+                loader: () => fetch('/warehouses.json').then(res=> res.json())
             }
         ]
     },
@@ -38,6 +42,16 @@ export const router = createBrowserRouter([
             {
                 path:'/register',
                 Component: Register
+            }
+        ]
+    },
+    {
+        path:'/dashboard',
+        Component: DashboardLayout,
+        children:[
+            {
+                path: '/dashboard/myParcels',
+                element: <PrivateRoute><MyParcels /></PrivateRoute>
             }
         ]
     }

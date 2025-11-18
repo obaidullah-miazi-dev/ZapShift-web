@@ -40,6 +40,10 @@ const Navbar = () => {
       <NavLink to="/beRider" onClick={handleNavClick}>
         <li className="linkStyle">Be a Rider</li>
       </NavLink>
+
+      {user && <NavLink to="/dashboard/myParcels" onClick={handleNavClick}>
+        <li className="linkStyle">My Parcels</li>
+      </NavLink>}
     </>
   );
 
