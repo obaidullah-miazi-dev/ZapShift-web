@@ -1,6 +1,6 @@
 // src/components/SendParcel.jsx
 import React, { useContext } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import Container from "../components/Container";
 import { useLoaderData } from "react-router";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
@@ -16,12 +16,12 @@ const SendParcel = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors },
   } = useForm();
 
-  const senderRegion = watch("senderRegion");
-  const receiverRegion = watch("receiverRegion");
+  const senderRegion = useWatch({control,name:"senderRegion"});
+  const receiverRegion = useWatch({control,name:"receiverRegion"});
 
   const districtByRegions = (region) => {
     const regionsDistrict = serviceCenters.filter(
@@ -56,10 +56,13 @@ const SendParcel = () => {
 
     console.log("cost of parcel : ", cost);
     // Here you can add API call to submit data
+    data.cost = Number(cost)
+    data.parcelWeight = Number(data.parcelWeight)
     axiosSecure
       .post("/parcels", data)
       .then((res) => {
         console.log(res.data);
+        alert('parcel send request successfull ')
       })
       .catch((error) => {
         console.log(error);

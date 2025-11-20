@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
+import logo from '../assets/images/ZapShift-logo.png'
 
 const DashboardLayout = () => {
   return (
@@ -29,7 +30,9 @@ const DashboardLayout = () => {
               <path d="M14 10l2 2l-2 2"></path>
             </svg>
           </label>
-          <div className="px-4">Navbar Title</div>
+          <div className="px-4">
+            <img src={logo} alt="logo" className="w-26" />
+          </div>
         </nav>
         {/* Page content here */}
         <Outlet />
@@ -67,6 +70,21 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Homepage</span>
               </NavLink>
             </li>
+
+            {/* my parcels  */}
+            {/* List item */}
+            <li>
+              <NavLink to="/dashboard/myParcels"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="My Parcels"
+              >
+                {/* Parcels icon */}
+                <img width="16" height="16" src="https://img.icons8.com/puffy/32/send-box.png" alt="send-box"/>
+                <span className="is-drawer-close:hidden">My Parcels</span>
+              </NavLink>
+            </li>
+
+            
 
             {/* List item */}
             <li>
