@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { BanknoteArrowUp, Delete, Edit, Info, Trash, View } from "lucide-react";
+import { BanknoteArrowUp, Delete, Edit, Info, MarsStroke, Trash, View } from "lucide-react";
 import { Link } from "react-router";
 
 const MyParcels = () => {
@@ -28,6 +28,17 @@ const MyParcels = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handlePayment = async (parcel) => {
+    const paymentInfo = {
+      cost: parcel.cost,
+      senderEmail: parcel.senderEmail,
+      parcelId: parcel._id,
+      parcelName: parcel.parcelName,
+    };
+    const res = await axiosSecure.post("/create-checkout-session", paymentInfo);
+    window.location.href = res.data.url;
   };
 
   return (
@@ -79,16 +90,7 @@ const MyParcels = () => {
                   {parcel._id}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">
-                  {parcel.cost}{" "}
-                  <span
-                    className={`${
-                      parcel.paymentStatus === "Paid"
-                        ? "text-green-500"
-                        : "text-red-500"
-                    }`}
-                  >
-                    ({parcel?.paymentStatus})
-                  </span>
+                  {parcel.cost}
                 </td>
                 <td className="py-4 px-2 space-x-2">
                   <button
@@ -108,14 +110,17 @@ const MyParcels = () => {
                     <Info />
                   </button>
 
-                  <Link to={`/dashboard/parcels/${parcel._id}`}>
+                  {parcel.paymentStatus === "Paid" ? (
+                    <button disabled className="text-green-600 font-semibold btn btn-square">Paid</button>
+                  ) : (
                     <button
-                      className="btn btn-square bg-main text-black"
+                      onClick={() => handlePayment(parcel)}
+                      className="btn btn-square bg-main"
                       title="Pay"
                     >
                       Pay
                     </button>
-                  </Link>
+                  )}
                 </td>
               </tr>
             ))}
