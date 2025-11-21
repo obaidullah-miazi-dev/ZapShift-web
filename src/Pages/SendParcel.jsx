@@ -58,6 +58,7 @@ const SendParcel = () => {
     // Here you can add API call to submit data
     data.cost = Number(cost)
     data.parcelWeight = Number(data.parcelWeight)
+    data.paymentStatus = 'Unpaid'
     axiosSecure
       .post("/parcels", data)
       .then((res) => {
