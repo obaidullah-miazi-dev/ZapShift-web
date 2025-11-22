@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { BanknoteArrowUp, Delete, Edit, Info, MarsStroke, Trash, View } from "lucide-react";
+import {   Edit, Info,  Trash } from "lucide-react";
 import { Link } from "react-router";
+
 
 const MyParcels = () => {
   const { user } = useContext(AuthContext);
@@ -106,11 +107,14 @@ const MyParcels = () => {
                   >
                     <Trash />
                   </button>
+                  
+                  <Link to={`/dashboard/parcelDetails/${parcel._id}`}>
                   <button className="btn btn-square" title="Info">
                     <Info />
                   </button>
+                  </Link>
 
-                  {parcel.paymentStatus === "Paid" ? (
+                  {parcel.paymentStatus === "paid" ? (
                     <button disabled className="text-green-600 font-semibold btn btn-square">Paid</button>
                   ) : (
                     <button

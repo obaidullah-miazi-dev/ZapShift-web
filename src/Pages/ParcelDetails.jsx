@@ -3,7 +3,7 @@ import React from "react";
 import { useParams } from "react-router";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 
-const Payment = () => {
+const ParcelDetails = () => {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const { data: parcels = {}, isLoading } = useQuery({
@@ -51,4 +51,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default ParcelDetails;
