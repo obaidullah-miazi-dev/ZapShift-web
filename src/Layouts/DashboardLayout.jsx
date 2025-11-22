@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
 import logo from '../assets/images/ZapShift-logo.png'
+import { History } from "lucide-react";
 
 const DashboardLayout = () => {
   return (
@@ -80,6 +81,20 @@ const DashboardLayout = () => {
               >
                 {/* Parcels icon */}
                 <img width="16" height="16" src="https://img.icons8.com/puffy/32/send-box.png" alt="send-box"/>
+                <span className="is-drawer-close:hidden">My Parcels</span>
+              </NavLink>
+            </li>
+
+
+            {/* Payment history  */}
+            {/* List item */}
+            <li>
+              <NavLink to="/dashboard/paymentHistory"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
+                data-tip="Payment History"
+              >
+                {/* Parcels icon */}
+                <History size={16} />
                 <span className="is-drawer-close:hidden">My Parcels</span>
               </NavLink>
             </li>

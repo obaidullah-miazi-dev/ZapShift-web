@@ -56,7 +56,7 @@ const MyParcels = () => {
                 Recipient Info
               </th>
               <th className="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Tracking Number
+                Parcel ID
               </th>
               <th className="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Payment Info
