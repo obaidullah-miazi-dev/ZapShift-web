@@ -8,13 +8,14 @@ import { Info } from "lucide-react";
 const PaymentHistory = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
-  const { data: paymentsHistory = [] } = useQuery({
+  const { data: paymentsHistory = [],isLoading } = useQuery({
     queryKey: ["paymentHistory", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/payments/?email=${user?.email}`);
       return res.data;
     },
   });
+  if(isLoading) return <p>loading........</p>
   console.log(paymentsHistory);
   return (
     <div className="m-12">
