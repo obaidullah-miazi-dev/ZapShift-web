@@ -5,10 +5,12 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import GoogleLogin from "../components/GoogleLogin";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser,setLoading } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure()
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -34,11 +36,25 @@ const Register = () => {
       }`;
 
       axios.post(imageApiUrl, formData).then((res) => {
-        console.log("after image upload", res.data.data.url);
+        const photoURL = res.data.data.url
+        
+        // create user in db 
+        const userInfo = {
+          email: data.email ,
+          displayName: data.name,
+          photoURL: photoURL
+        }
+        axiosSecure.post('/users',userInfo)
+        .then(res => {
+          if(res.data.insertedId){
+            console.log('user created successfully');
+          }
+        })
+        
 
         const userProfile = {
           displayName: data.name,
-          photoURL: res.data.data.url,
+          photoURL: photoURL
         };
 
         updateUser(userProfile)
@@ -57,6 +73,7 @@ const Register = () => {
     .catch(error => {
       alert(error)
     })
+    .finally(()=> setLoading(false))
   };
   return (
     <div>

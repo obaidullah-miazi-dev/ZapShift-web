@@ -8,7 +8,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const {register,handleSubmit,formState:{errors}} = useForm()
-    const {signInUser} = useContext(AuthContext)
+    const {signInUser,setLoading} = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
     const handleLogin = (data)=>{
@@ -18,7 +18,7 @@ const Login = () => {
             navigate(location.state || '/')
         }).catch(error=>{
             alert(error)
-        })
+        }).finally(() => setLoading(false))
     }
   return (
     <div>
