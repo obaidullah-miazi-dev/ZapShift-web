@@ -14,6 +14,7 @@ import PaymentSuccess from "../Pages/PaymentSuccess";
 import PaymentCanceled from "../Pages/PaymentCanceled";
 import ParcelDetails from "../Pages/ParcelDetails";
 import PaymentHistory from "../Pages/PaymentHistory";
+import BeARider from "../Pages/BeARider";
 
 export const router = createBrowserRouter([
     {
@@ -32,6 +33,11 @@ export const router = createBrowserRouter([
             {
                 path:'/sendParcel',
                 Component: SendParcel,
+                loader: () => fetch('/warehouses.json').then(res=> res.json())
+            },
+            {
+                path:'/beARider',
+                Component: BeARider,
                 loader: () => fetch('/warehouses.json').then(res=> res.json())
             }
         ]
