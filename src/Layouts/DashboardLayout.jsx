@@ -2,8 +2,10 @@ import React from "react";
 import { NavLink, Outlet } from "react-router";
 import logo from '../assets/images/ZapShift-logo.png'
 import { History, User, UserPlus } from "lucide-react";
+import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
+  const {role} = useRole()
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -95,13 +97,16 @@ const DashboardLayout = () => {
               >
                 {/* Parcels icon */}
                 <History size={16} />
-                <span className="is-drawer-close:hidden">My Parcels</span>
+                <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
 
 
-            {/* riders approval  */}
-            {/* List item */}
+            {/* admin can access these links  */}
+            {
+              role === 'admin' && <>
+              
+              {/* riders approval  */}
             <li>
               <NavLink to="/dashboard/riderApproval"
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
@@ -113,9 +118,7 @@ const DashboardLayout = () => {
               </NavLink>
             </li>
 
-
             {/* user management  */}
-            {/* List item */}
             <li>
               <NavLink to="/dashboard/userManagement"
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
@@ -126,6 +129,9 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">User Management</span>
               </NavLink>
             </li>
+              
+              </>
+            }
 
             
 
