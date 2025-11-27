@@ -17,6 +17,7 @@ import PaymentHistory from "../Pages/PaymentHistory";
 import BeARider from "../Pages/BeARider";
 import RiderApproval from "../Pages/RiderApproval";
 import UserManagement from "../Pages/UserManagement";
+import AdminOnlyRoute from "../Provider/AdminOnlyRoute";
 
 export const router = createBrowserRouter([
     {
@@ -34,12 +35,12 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/sendParcel',
-                Component: SendParcel,
+                element: <PrivateRoute><SendParcel/></PrivateRoute>,
                 loader: () => fetch('/warehouses.json').then(res=> res.json())
             },
             {
                 path:'/beARider',
-                Component: BeARider,
+                element:<PrivateRoute><BeARider/></PrivateRoute>,
                 loader: () => fetch('/warehouses.json').then(res=> res.json())
             }
         ]
@@ -60,11 +61,11 @@ export const router = createBrowserRouter([
     },
     {
         path:'/dashboard',
-        Component: DashboardLayout,
+        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
         children:[
             {
                 path: '/dashboard/myParcels',
-                element: <PrivateRoute><MyParcels /></PrivateRoute>
+                Component: MyParcels
             },
             {
                 path:'/dashboard/parcelDetails/:id',
@@ -84,11 +85,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/riderApproval',
-                Component: RiderApproval
+                element: <AdminOnlyRoute><RiderApproval/></AdminOnlyRoute>
             },
             {
                 path: '/dashboard/userManagement',
-                Component: UserManagement
+                element: <AdminOnlyRoute><UserManagement/></AdminOnlyRoute>
             }
             
         ]
