@@ -8,7 +8,7 @@ import { Shield, ShieldOff } from 'lucide-react';
 const UserManagement = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: users = [], isLoading } = useQuery({
+  const {refetch,data: users = [], isLoading } = useQuery({
     queryKey: ['user-manage'],
     queryFn: async () => {
       const res = await axiosSecure.get('/users');
@@ -16,7 +16,26 @@ const UserManagement = () => {
     },
   });
 
-  
+  const handleRole = (user,role) =>{
+    const roleInfo = {role:role}
+    axiosSecure.patch(`/users/${user?._id}`,roleInfo)
+    .then(res => {
+        if(res.data.modifiedCount){
+            refetch()
+            alert(`${user?.displayName} marked as ${role}`)
+        }
+    }).catch(err =>{
+        alert(err)
+    })
+  }
+
+  const handleMakeAdmin = (user)=>{
+    handleRole(user,'admin')
+  }
+
+  const handleRemoveAdmin = (user)=>{
+    handleRole(user,'user')
+  }
 
 
   
@@ -88,7 +107,7 @@ const UserManagement = () => {
                       {/* Current Role Badge */}
                       <td className="px-6 py-5">
                         <span
-                          className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${
+                          className={`text-center px-3 py-1 rounded-full  font-medium ${
                             user.role === 'admin'
                               ? 'bg-purple-100 text-purple-800'
                               : 'bg-gray-100 text-gray-700'
@@ -101,13 +120,13 @@ const UserManagement = () => {
                       {/* Action: Toggle Admin */}
                       <td className="px-6 py-5 text-center">
                           {user.role === 'admin' ? (
-                            <button className='group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-white bg-red-500 transition-all
+                            <button onClick={()=>handleRemoveAdmin(user)} className='group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-white bg-red-500 transition-all
                             disabled:opacity-60'>
                               <ShieldOff className="w-4 h-4" />
                               Remove Admin
                             </button>
                           ) : (
-                            <button className='group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all
+                            <button onClick={()=>handleMakeAdmin(user)} className='group relative inline-flex items-center gap-2 px-5 py-2.5 cursor-pointer rounded-lg font-medium transition-all
                             disabled:opacity-60 bg-main'>
                               <Shield className="w-4 h-4" />
                               Make Admin
