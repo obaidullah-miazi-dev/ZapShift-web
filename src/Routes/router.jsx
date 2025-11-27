@@ -18,6 +18,7 @@ import BeARider from "../Pages/BeARider";
 import RiderApproval from "../Pages/RiderApproval";
 import UserManagement from "../Pages/UserManagement";
 import AdminOnlyRoute from "../Provider/AdminOnlyRoute";
+import AssignRider from "../Pages/AssignRider";
 
 export const router = createBrowserRouter([
     {
@@ -90,7 +91,11 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/userManagement',
                 element: <AdminOnlyRoute><UserManagement/></AdminOnlyRoute>
-            }
+            },
+            {
+                path: '/dashboard/assignRider',
+                element: <AdminOnlyRoute><AssignRider/></AdminOnlyRoute>
+            },
             
         ]
     }

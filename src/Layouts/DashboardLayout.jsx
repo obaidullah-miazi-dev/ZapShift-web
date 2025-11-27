@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
 import logo from '../assets/images/ZapShift-logo.png'
-import { History, User, UserPlus } from "lucide-react";
+import { History, Motorbike, User, UserPlus } from "lucide-react";
 import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
@@ -127,6 +127,19 @@ const DashboardLayout = () => {
                 {/* rider approve icon */}
                 <User size={16} />
                 <span className="is-drawer-close:hidden">User Management</span>
+              </NavLink>
+            </li>
+
+
+            {/* Assign Rider  */}
+            <li>
+              <NavLink to="/dashboard/assignRider"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
+                data-tip="Assign Rider"
+              >
+                {/* rider approve icon */}
+                <Motorbike size={16} />
+                <span className="is-drawer-close:hidden">Assign Rider</span>
               </NavLink>
             </li>
               

@@ -59,6 +59,7 @@ const SendParcel = () => {
     data.cost = Number(cost)
     data.parcelWeight = Number(data.parcelWeight)
     data.paymentStatus = 'Unpaid'
+    data.deliveryStatus = ''
     axiosSecure
       .post("/parcels", data)
       .then((res) => {
@@ -164,7 +165,7 @@ const SendParcel = () => {
                   <input
                     type="text"
                     placeholder="Sender Name"
-                    defaultValue={user?.displayName}
+                    value={user?.displayName}
                     {...register("senderName", { required: true })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-main focus:border-transparent outline-none transition"
                   />
@@ -182,7 +183,7 @@ const SendParcel = () => {
                   <input
                     type="email"
                     placeholder="Sender Email"
-                    defaultValue={user?.email}
+                    value={user?.email}
                     {...register("senderEmail", { required: true })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-main focus:border-transparent outline-none transition"
                   />

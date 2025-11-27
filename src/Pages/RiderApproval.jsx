@@ -12,6 +12,7 @@ const RiderApproval = () => {
       return res.data;
     },
   });
+  console.log(riders)
 
   const updateRiderStatus = (rider, status) => {
     const updateInfo = { status: status, email: rider?.email };
@@ -68,7 +69,7 @@ console.log('rider delete button called',rider)
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <Container>
-        <div className="max-w-6xl mx-auto">
+        <div className="mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold text-second mb-8">
             Rider Approval Dashboard
           </h1>
@@ -86,6 +87,9 @@ console.log('rider delete button called',rider)
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       District
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      Working Status
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       Status
@@ -108,13 +112,13 @@ console.log('rider delete button called',rider)
                   ) : (
                     riders.map((rider) => (
                       <tr
-                        key={rider.id}
+                        key={rider._id}
                         className="hover:bg-gray-50 transition"
                       >
                         <td className="px-6 py-5 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="w-10 h-10 rounded-full bg-lime-100 flex items-center justify-center text-lime-700 font-bold">
-                              {rider.name.charAt(0)}
+                              <img src={rider.photoURL} alt={rider.name} className="rounded-full"/>
                             </div>
                             <span className="ml-3 font-medium text-gray-900">
                               {rider.name}
@@ -126,6 +130,9 @@ console.log('rider delete button called',rider)
                         </td>
                         <td className="px-6 py-5 text-gray-600">
                           {rider.district}
+                        </td>
+                        <td className={`px-6 py-5 ${rider.workStatus === 'available' ? 'text-green-600' : 'text-red-600'}`}>
+                          {rider.workStatus}
                         </td>
                         <td className="px-6 py-5">
                           {getStatusBadge(rider.status)}

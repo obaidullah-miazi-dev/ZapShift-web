@@ -41,6 +41,7 @@ const MyParcels = () => {
     const res = await axiosSecure.post("/create-checkout-session", paymentInfo);
     window.location.href = res.data.url;
   };
+  console.log(parcels)
 
   return (
     <div className="m-12">
@@ -56,7 +57,10 @@ const MyParcels = () => {
                 Recipient Info
               </th>
               <th className="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Parcel ID
+                Tracking ID
+              </th>
+              <th className="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Delivery Status
               </th>
               <th className="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Payment Info
@@ -88,7 +92,10 @@ const MyParcels = () => {
                   )}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {parcel._id}
+                  {parcel.trackingId}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {parcel.deliveryStatus}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">
                   {parcel.cost}
