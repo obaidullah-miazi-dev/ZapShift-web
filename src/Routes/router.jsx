@@ -16,6 +16,7 @@ import ParcelDetails from "../Pages/ParcelDetails";
 import PaymentHistory from "../Pages/PaymentHistory";
 import BeARider from "../Pages/BeARider";
 import RiderApproval from "../Pages/RiderApproval";
+import UserManagement from "../Pages/UserManagement";
 
 export const router = createBrowserRouter([
     {
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/riderApproval',
                 Component: RiderApproval
+            },
+            {
+                path: '/dashboard/userManagement',
+                Component: UserManagement
             }
             
         ]

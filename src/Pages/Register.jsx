@@ -64,7 +64,7 @@ const Register = () => {
           })
           .catch((error) => {
             alert(error);
-          });
+          }).finally(()=>setLoading(false))
       })
       .catch(error=>{
         alert(error)
