@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
 import logo from "../assets/images/ZapShift-logo.png";
-import { History, Motorbike, PackageCheck, User, UserPlus } from "lucide-react";
+import { History, ListChecks, Motorbike, PackageCheck, User, UserPlus } from "lucide-react";
 import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
@@ -121,6 +121,22 @@ const DashboardLayout = () => {
                     <PackageCheck size={16}/>
                     <span className="is-drawer-close:hidden">
                       Assign Delivery 
+                    </span>
+                  </NavLink>
+                </li>
+
+
+
+                <li>
+                  <NavLink
+                    to="/dashboard/completedDelivery"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
+                    data-tip="Completed Delivery"
+                  >
+                    {/* completed delivery icon */}
+                    <ListChecks size={16}/>
+                    <span className="is-drawer-close:hidden">
+                      Completed Delivery 
                     </span>
                   </NavLink>
                 </li>

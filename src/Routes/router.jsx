@@ -21,6 +21,7 @@ import AdminOnlyRoute from "../Provider/AdminOnlyRoute";
 import AssignRider from "../Pages/AssignRider";
 import RiderOnlyRoute from "../Provider/RiderOnlyRoute";
 import DelliveryAssign from "../Pages/DelliveryAssign";
+import CompletedDelivery from "../Pages/CompletedDelivery";
 
 export const router = createBrowserRouter([
     {
@@ -101,6 +102,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/deliveryAssign',
                 element: <RiderOnlyRoute><DelliveryAssign/></RiderOnlyRoute>
+            },
+            {
+                path: '/dashboard/completedDelivery',
+                element: <RiderOnlyRoute><CompletedDelivery/></RiderOnlyRoute>
             }
             
         ]

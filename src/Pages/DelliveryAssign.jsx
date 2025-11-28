@@ -17,7 +17,7 @@ const DelliveryAssign = () => {
   });
 
   const handleUpdateDeliveryStatus = (parcel, status) => {
-    const parcelInfo = { deliveryStatus: status };
+    const parcelInfo = { deliveryStatus: status,riderId: parcel.riderId };
     axiosSecure
       .patch(`/parcels/${parcel._id}/status`, parcelInfo)
       .then((res) => {
