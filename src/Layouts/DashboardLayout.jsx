@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
-import logo from '../assets/images/ZapShift-logo.png'
-import { History, Motorbike, User, UserPlus } from "lucide-react";
+import logo from "../assets/images/ZapShift-logo.png";
+import { History, Motorbike, PackageCheck, User, UserPlus } from "lucide-react";
 import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
-  const {role} = useRole()
+  const { role } = useRole();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -52,7 +52,8 @@ const DashboardLayout = () => {
           <ul className="menu w-full grow">
             {/* List item */}
             <li>
-              <NavLink to='/'
+              <NavLink
+                to="/"
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="Homepage"
               >
@@ -77,21 +78,27 @@ const DashboardLayout = () => {
             {/* my parcels  */}
             {/* List item */}
             <li>
-              <NavLink to="/dashboard/myParcels"
+              <NavLink
+                to="/dashboard/myParcels"
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="My Parcels"
               >
                 {/* Parcels icon */}
-                <img width="16" height="16" src="https://img.icons8.com/puffy/32/send-box.png" alt="send-box"/>
+                <img
+                  width="16"
+                  height="16"
+                  src="https://img.icons8.com/puffy/32/send-box.png"
+                  alt="send-box"
+                />
                 <span className="is-drawer-close:hidden">My Parcels</span>
               </NavLink>
             </li>
 
-
             {/* Payment history  */}
             {/* List item */}
             <li>
-              <NavLink to="/dashboard/paymentHistory"
+              <NavLink
+                to="/dashboard/paymentHistory"
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
                 data-tip="Payment History"
               >
@@ -101,52 +108,72 @@ const DashboardLayout = () => {
               </NavLink>
             </li>
 
+            {/* rider only route  */}
+            {role === "rider" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/deliveryAssign"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
+                    data-tip="Assign Delivery"
+                  >
+                    {/* rider approve icon */}
+                    <PackageCheck size={16}/>
+                    <span className="is-drawer-close:hidden">
+                      Assign Delivery 
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             {/* admin can access these links  */}
-            {
-              role === 'admin' && <>
-              
-              {/* riders approval  */}
-            <li>
-              <NavLink to="/dashboard/riderApproval"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
-                data-tip="Riders Approval"
-              >
-                {/* rider approve icon */}
-                <UserPlus size={16} />
-                <span className="is-drawer-close:hidden">Riders Approval</span>
-              </NavLink>
-            </li>
+            {role === "admin" && (
+              <>
+                {/* riders approval  */}
+                <li>
+                  <NavLink
+                    to="/dashboard/riderApproval"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
+                    data-tip="Riders Approval"
+                  >
+                    {/* rider approve icon */}
+                    <UserPlus size={16} />
+                    <span className="is-drawer-close:hidden">
+                      Riders Approval
+                    </span>
+                  </NavLink>
+                </li>
 
-            {/* user management  */}
-            <li>
-              <NavLink to="/dashboard/userManagement"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
-                data-tip="User Management"
-              >
-                {/* rider approve icon */}
-                <User size={16} />
-                <span className="is-drawer-close:hidden">User Management</span>
-              </NavLink>
-            </li>
+                {/* user management  */}
+                <li>
+                  <NavLink
+                    to="/dashboard/userManagement"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
+                    data-tip="User Management"
+                  >
+                    {/* rider approve icon */}
+                    <User size={16} />
+                    <span className="is-drawer-close:hidden">
+                      User Management
+                    </span>
+                  </NavLink>
+                </li>
 
-
-            {/* Assign Rider  */}
-            <li>
-              <NavLink to="/dashboard/assignRider"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
-                data-tip="Assign Rider"
-              >
-                {/* rider approve icon */}
-                <Motorbike size={16} />
-                <span className="is-drawer-close:hidden">Assign Rider</span>
-              </NavLink>
-            </li>
-              
+                {/* Assign Rider  */}
+                <li>
+                  <NavLink
+                    to="/dashboard/assignRider"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right my-2"
+                    data-tip="Assign Rider"
+                  >
+                    {/* rider approve icon */}
+                    <Motorbike size={16} />
+                    <span className="is-drawer-close:hidden">Assign Rider</span>
+                  </NavLink>
+                </li>
               </>
-            }
-
-            
+            )}
 
             {/* List item */}
             <li>
