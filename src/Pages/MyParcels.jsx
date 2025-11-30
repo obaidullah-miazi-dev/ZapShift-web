@@ -92,7 +92,7 @@ const MyParcels = () => {
                   )}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {parcel.trackingId}
+                  <Link to={`/track-parcel/${parcel.trackingId}`}>{parcel.trackingId}</Link>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {parcel.deliveryStatus}
