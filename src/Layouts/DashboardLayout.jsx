@@ -3,6 +3,7 @@ import { NavLink, Outlet } from "react-router";
 import logo from "../assets/images/ZapShift-logo.png";
 import { History, ListChecks, Motorbike, PackageCheck, User, UserPlus } from "lucide-react";
 import useRole from "../Hooks/useRole";
+import logoIcon from '../assets/images/logo.png'
 
 const DashboardLayout = () => {
   const { role } = useRole();
@@ -54,6 +55,19 @@ const DashboardLayout = () => {
             <li>
               <NavLink
                 to="/"
+                end
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Homepage"
+              >
+                {/* logo icon */}
+                <img src={logoIcon} alt="" />
+              </NavLink>
+            </li>
+            {/* List item */}
+            <li>
+              <NavLink
+                to="/dashboard"
+                end
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="Homepage"
               >
@@ -71,7 +85,7 @@ const DashboardLayout = () => {
                   <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
                   <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 </svg>
-                <span className="is-drawer-close:hidden">Homepage</span>
+                <span className="is-drawer-close:hidden">Dashboard</span>
               </NavLink>
             </li>
 
@@ -85,8 +99,8 @@ const DashboardLayout = () => {
               >
                 {/* Parcels icon */}
                 <img
-                  width="16"
-                  height="16"
+                  width="18"
+                  height="18"
                   src="https://img.icons8.com/puffy/32/send-box.png"
                   alt="send-box"
                 />
@@ -103,7 +117,7 @@ const DashboardLayout = () => {
                 data-tip="Payment History"
               >
                 {/* Parcels icon */}
-                <History size={16} />
+                <History size={18} />
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
@@ -118,7 +132,7 @@ const DashboardLayout = () => {
                     data-tip="Assign Delivery"
                   >
                     {/* rider approve icon */}
-                    <PackageCheck size={16}/>
+                    <PackageCheck size={18}/>
                     <span className="is-drawer-close:hidden">
                       Assign Delivery 
                     </span>
@@ -134,7 +148,7 @@ const DashboardLayout = () => {
                     data-tip="Completed Delivery"
                   >
                     {/* completed delivery icon */}
-                    <ListChecks size={16}/>
+                    <ListChecks size={18}/>
                     <span className="is-drawer-close:hidden">
                       Completed Delivery 
                     </span>
@@ -154,7 +168,7 @@ const DashboardLayout = () => {
                     data-tip="Riders Approval"
                   >
                     {/* rider approve icon */}
-                    <UserPlus size={16} />
+                    <UserPlus size={18} />
                     <span className="is-drawer-close:hidden">
                       Riders Approval
                     </span>
@@ -169,7 +183,7 @@ const DashboardLayout = () => {
                     data-tip="User Management"
                   >
                     {/* rider approve icon */}
-                    <User size={16} />
+                    <User size={18} />
                     <span className="is-drawer-close:hidden">
                       User Management
                     </span>
@@ -184,38 +198,12 @@ const DashboardLayout = () => {
                     data-tip="Assign Rider"
                   >
                     {/* rider approve icon */}
-                    <Motorbike size={16} />
+                    <Motorbike size={18} />
                     <span className="is-drawer-close:hidden">Assign Rider</span>
                   </NavLink>
                 </li>
               </>
             )}
-
-            {/* List item */}
-            <li>
-              <button
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Settings"
-              >
-                {/* Settings icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2"
-                  fill="none"
-                  stroke="currentColor"
-                  className="my-1.5 inline-block size-4"
-                >
-                  <path d="M20 7h-9"></path>
-                  <path d="M14 17H5"></path>
-                  <circle cx="17" cy="17" r="3"></circle>
-                  <circle cx="7" cy="7" r="3"></circle>
-                </svg>
-                <span className="is-drawer-close:hidden">Settings</span>
-              </button>
-            </li>
           </ul>
         </div>
       </div>

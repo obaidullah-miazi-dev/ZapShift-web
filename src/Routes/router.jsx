@@ -23,6 +23,7 @@ import RiderOnlyRoute from "../Provider/RiderOnlyRoute";
 import DelliveryAssign from "../Pages/DelliveryAssign";
 import CompletedDelivery from "../Pages/CompletedDelivery";
 import TrackParcel from "../Pages/TrackParcel";
+import DashboardHome from "../Pages/DashboardHome";
 
 export const router = createBrowserRouter([
     {
@@ -69,47 +70,51 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path:'/dashboard',
+        path:'dashboard',
         element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
         children:[
             {
-                path: '/dashboard/myParcels',
+                index: true,
+                Component: DashboardHome
+            },
+            {
+                path: 'myParcels',
                 Component: MyParcels
             },
             {
-                path:'/dashboard/parcelDetails/:id',
+                path:'parcelDetails/:id',
                 Component: ParcelDetails
             },
             {
-                path: '/dashboard/payment-success',
+                path: 'payment-success',
                 Component: PaymentSuccess
             },
             {
-                path: '/dashboard/payment-canceled',
+                path: 'payment-canceled',
                 Component: PaymentCanceled
             },
             {
-                path: '/dashboard/paymentHistory',
+                path: 'paymentHistory',
                 Component: PaymentHistory
             },
             {
-                path: '/dashboard/riderApproval',
+                path: 'riderApproval',
                 element: <AdminOnlyRoute><RiderApproval/></AdminOnlyRoute>
             },
             {
-                path: '/dashboard/userManagement',
+                path: 'userManagement',
                 element: <AdminOnlyRoute><UserManagement/></AdminOnlyRoute>
             },
             {
-                path: '/dashboard/assignRider',
+                path: 'assignRider',
                 element: <AdminOnlyRoute><AssignRider/></AdminOnlyRoute>
             },
             {
-                path: '/dashboard/deliveryAssign',
+                path: 'deliveryAssign',
                 element: <RiderOnlyRoute><DelliveryAssign/></RiderOnlyRoute>
             },
             {
-                path: '/dashboard/completedDelivery',
+                path: 'completedDelivery',
                 element: <RiderOnlyRoute><CompletedDelivery/></RiderOnlyRoute>
             }
             
