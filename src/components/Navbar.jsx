@@ -10,7 +10,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
   const drawerCheckbox = useRef(null);
-  const {user,logOut} = useContext(AuthContext)
+  const { user, logOut } = useContext(AuthContext);
 
   const handleNavClick = () => {
     if (drawerCheckbox.current) {
@@ -18,10 +18,10 @@ const Navbar = () => {
     }
   };
 
-  const handleLogOut = ()=>{
-    alert('are you sure to log out')
-    logOut()
-  }
+  const handleLogOut = () => {
+    alert("are you sure to log out");
+    logOut();
+  };
 
   const navlinks = (
     <>
@@ -41,15 +41,17 @@ const Navbar = () => {
         <li className="linkStyle">Be a Rider</li>
       </NavLink>
 
-      {user && <NavLink to="/dashboard/myParcels" onClick={handleNavClick}>
-        <li className="linkStyle">My Parcels</li>
-      </NavLink>}
+      {user && (
+        <NavLink to="/dashboard/myParcels" onClick={handleNavClick}>
+          <li className="linkStyle">My Parcels</li>
+        </NavLink>
+      )}
     </>
   );
 
   return (
-    <Container>
-      <nav className="bg-white rounded-2xl md:px-8 px-4 md:py-2">
+    
+      <nav className="bg-white/50 backdrop-blur-xl rounded-2xl md:px-8 px-4 md:py-2 sticky top-2 z-50 w-11/12 mx-auto">
         <nav className="py-4 flex justify-between items-center">
           <Link to="/">
             <img src={logo} alt="logo" />
@@ -59,10 +61,30 @@ const Navbar = () => {
           </ul>
 
           <div className="xl:flex hidden items-center gap-4 font-semibold text-lg">
-            {user?<button onClick={handleLogOut}><OutlineBtn className="rounded-xl">Log Out</OutlineBtn></button>:<NavLink to='/login'><OutlineBtn className="rounded-xl">Sign In</OutlineBtn></NavLink>}
+            {user ? (
+              <button onClick={handleLogOut}>
+                <OutlineBtn className="rounded-xl">Log Out</OutlineBtn>
+              </button>
+            ) : (
+              <NavLink to="/login">
+                <OutlineBtn className="rounded-xl">Sign In</OutlineBtn>
+              </NavLink>
+            )}
             <div className="flex items-center gap-0.5">
-              <PrimaryBtn className="rounded-xl">Be a Rider</PrimaryBtn>
-              <CircleIcon />
+              {!user && (
+                <PrimaryBtn className="rounded-xl">Be a Rider</PrimaryBtn>
+              )}
+              {user ? (
+                <Link to='/dashboard'>
+                  <img
+                    src={user.photoURL}
+                    alt={user.displayName}
+                    className="rounded-full w-14"
+                  />
+                </Link>
+              ) : (
+                <CircleIcon />
+              )}
             </div>
           </div>
 
@@ -104,7 +126,7 @@ const Navbar = () => {
           </div>
         </nav>
       </nav>
-    </Container>
+    
   );
 };
 
